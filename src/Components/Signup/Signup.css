@@ -1,0 +1,104 @@
+/* Base styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  overflow: auto; /* Allow scrolling when needed */
+  display: flex;
+  justify-content: center;
+}
+
+/* Container for centering content */
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Use min-height instead of height */
+  width: 100%;
+}
+
+/* Signup container */
+.signupParentDiv {
+  border: 1px solid #ddd;
+  width: 350px; /* Reduced width */
+  padding: 20px; /* Increased padding */
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-align: left; /* Align content to the left */
+  margin: 50px auto; /* Add gap from top and bottom */
+}
+
+/* Logo */
+.signupParentDiv img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 15px; /* Reduced margin */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Input fields */
+.signupParentDiv label {
+  display: block;
+  margin-bottom: 5px; /* Adjusted margin */
+}
+
+.signupParentDiv .input {
+  width: calc(100% - 16px); /* Adjusted width */
+  padding: 8px; /* Increased padding */
+  margin-bottom: 10px; /* Adjusted margin */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.signupParentDiv .input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Buttons */
+.signupParentDiv button {
+  width: calc(100% - 16px); /* Adjusted width */
+  padding: 10px; /* Reduced padding */
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.signupParentDiv button:hover {
+  background-color: white;
+  color: #007bff;
+  border: 2px solid #007bff;
+}
+
+.signupParentDiv a {
+  display: block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+  cursor: pointer;
+  text-align: center;
+}
+
+.signupParentDiv a:hover {
+  color: #0056b3;
+}
+
+/* Error messages */
+.signupParentDiv .error {
+  color: red;
+  font-size: 0.9em;
+  margin: -8px 0 8px 0; /* Reduced margin */
+  text-align: left;
+}

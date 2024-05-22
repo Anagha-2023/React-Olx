@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { FirebaseContext } from '../../Store/Context';
 import Logo from '../../olx-logo.png';
 import './Login.css';
@@ -28,7 +27,28 @@ function Login() {
         navigate('/');
       })
       .catch((error) => {
-        setError(error.message);
+        console.error("Login error:", error); // Log the error object
+        if (error.code) {
+          switch (error.code) {
+            case 'auth/wrong-password':
+              setError('Password is incorrect.');
+              break;
+            case 'auth/user-not-found':
+              setError('No user found with this email.');
+              break;
+            case 'auth/invalid-email':
+              setError('The email address is not valid.');
+              break;
+            case 'auth/user-disabled':
+              setError('This user account has been disabled.');
+              break;
+            default:
+              setError('An error occurred. Please try again.');
+              break;
+          }
+        } else {
+          setError('An error occurred. Please try again.');
+        }
       });
   };
 

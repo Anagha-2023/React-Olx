@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div>
-      <ContextProvider>
+      
         <PostProvider>
           <Router>
             <Routes>
@@ -33,7 +33,7 @@ function App() {
             </Routes>
           </Router>
         </PostProvider>
-      </ContextProvider>
+      
     </div>
   );
 }

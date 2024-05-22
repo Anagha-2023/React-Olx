@@ -58,30 +58,34 @@ export default function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    firebase.auth().createUserWithEmailAndPassword(email, password).then((result) => {
-      result.user.updateProfile({ displayName: username }).then(() => {
-        firebase.firestore().collection('users').add({
-          id: result.user.uid,
-          username: username,
-          phone: phone
-        }).then(() => {
-          // Redirect to the login page after successful signup
-          navigate('/login');
-        })
-      })
-    }).catch((error) => {
-      alert(error.message);
-      // Optionally, you can clear the input fields after displaying the error
-      setUsername('');
-      setEmail('');
-      setPhone('');
-      setPassword('');
-    });
+    if (validate()) {
+      firebase.auth().createUserWithEmailAndPassword(email, password).then((result) => {
+        result.user.updateProfile({ displayName: username }).then(() => {
+          firebase.firestore().collection('users').add({
+            id: result.user.uid,
+            username: username,
+            phone: phone
+          }).then(() => {
+            // Redirect to the login page after successful signup
+            navigate('/login');
+          }).catch((error) => {
+            // Handle Firestore errors
+            console.error("Error adding document: ", error);
+          });
+        }).catch((error) => {
+          // Handle updateProfile errors
+          console.error("Error updating profile: ", error);
+        });
+      }).catch((error) => {
+        // Handle createUserWithEmailAndPassword errors
+        console.error("Error creating user: ", error);
+        setErrors({ signup: error.message });
+      });
+    }
   };
-  
 
   return (
-    <div>
+    <div className="center-container">
       <div className="signupParentDiv">
         <img width="200px" height="200px" src={Logo} alt="OLX Logo"></img>
         <form onSubmit={handleSubmit}>
@@ -91,7 +95,12 @@ export default function Signup() {
             className="input"
             type="text"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => {
+              setUsername(e.target.value);
+              if (errors.username) {
+                setErrors((prevErrors) => ({ ...prevErrors, username: '' }));
+              }
+            }}
             id="username"
             name="username"
           />
@@ -103,7 +112,12 @@ export default function Signup() {
             className="input"
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (errors.email) {
+                setErrors((prevErrors) => ({ ...prevErrors, email: '' }));
+              }
+            }}
             id="email"
             name="email"
           />
@@ -115,7 +129,12 @@ export default function Signup() {
             className="input"
             type="text"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => {
+              setPhone(e.target.value);
+              if (errors.phone) {
+                setErrors((prevErrors) => ({ ...prevErrors, phone: '' }));
+              }
+            }}
             id="phone"
             name="phone"
           />
@@ -127,13 +146,19 @@ export default function Signup() {
             className="input"
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              if (errors.password) {
+                setErrors((prevErrors) => ({ ...prevErrors, password: '' }));
+              }
+            }}
             id="password"
             name="password"
           />
           {errors.password && <span className="error">{errors.password}</span>}
           <br />
-          <button type="submit" disabled={Object.keys(errors).length > 0}>Signup</button>
+          {errors.signup && <span className="error">{errors.signup}</span>}
+          <button type="submit">Signup</button>
         </form>
         <a onClick={() => navigate('/login')}>Login</a>
       </div>

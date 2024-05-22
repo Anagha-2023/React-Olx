@@ -29,7 +29,9 @@ function Header() {
   return (
     <div className="headerParentDiv">
       <div className="headerChildDiv">
-        <div className="brandName">
+        <div className="brandName" onClick={()=>{
+          navigate('/')
+        }}>
           <OlxLogo></OlxLogo>
         </div>
         <div className="placeSearch">
@@ -53,12 +55,12 @@ function Header() {
           <Arrow></Arrow>
         </div>
         <div className="loginPage">
-          <span onClick={()=>{
+          <span className='loginTxt' onClick={()=>{
             navigate('/login')
           }}>
-            {displayName ? `Welcome ${displayName}` : 'Login'}
+            {displayName ? `Welcome ${displayName} !` : 'Login'}
           </span>
-          <hr/>
+          
         </div>
         {user && <span onClick={() => {
           firebase.auth().signOut();

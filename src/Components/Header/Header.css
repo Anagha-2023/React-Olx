@@ -2,12 +2,16 @@
   padding: 10px;
   background-color: whitesmoke;
   position: fixed;
-  width: 100vw;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1550px; /* Adjust this value based on your design */
   z-index: 999;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .headerChildDiv {
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,7 +39,7 @@
 }
 
 .productSearch {
-  width: 35em;
+  width: 38em;
   height: 48px;
   border: 2px solid #002f34;
   border-radius: 4px;
@@ -85,16 +89,11 @@
 }
 
 .language span {
-  /* justify-content: space-between;
-  align-items: center; */
   font-size: 15px;
   white-space: normal;
   text-overflow: ellipsis;
   font-weight: bolder;
   margin-right: 5px;
-}
-
-.language svg {
 }
 
 .span {
@@ -108,11 +107,15 @@
 
 .loginPage hr {
   margin: 0;
-  background-color: black;
   height: 2px;
 }
 
-.loginPage a{
+.loginTxt {
+  font-weight: 700;
+  color: #3a77ff;
+}
+
+.loginPage a {
   text-decoration: none;
 }
 
@@ -136,6 +139,7 @@
 .sellMenu .right {
   fill: #3a77ff;
 }
+
 .sellMenu .sellMenuContent {
   display: flex;
   position: absolute;
@@ -148,9 +152,6 @@
   color: #002f34;
 }
 
-/* .sellMenu .sellMenuContent svg {
-  align-items: center;
-} */
 .sellMenu .sellMenuContent span {
   margin-left: 5px;
 }
@@ -161,4 +162,9 @@
   .sellMenu {
     display: none;
   }
+}
+
+/* Add margin-top to body content to avoid overlap with fixed header */
+body {
+  margin-top: 70px; /* Adjust this value based on the height of your header */
 }
